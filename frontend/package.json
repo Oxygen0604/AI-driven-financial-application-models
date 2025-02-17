@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "asserts": "^4.0.2",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
     "js-cookie": "^3.0.5",
@@ -35,5 +36,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/react": "^19.0.9",
+    "@types/react-dom": "^19.0.3"
   }
 }

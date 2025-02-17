@@ -12,9 +12,7 @@ interface AuthState {
     nickname?: string;
     email: string;
     password: string;
-    qq_id: string;
     username: string;
-    campus_id: number;
   }) => Promise<void>;
   logout: () => void;
   deleteUser: (username: string) => Promise<void>;
@@ -50,9 +48,7 @@ const useAuthStore = create<AuthState>()(
         nickname?: string;
         email: string;
         password: string;
-        qq_id: string;
         username: string;
-        campus_id: number;
       }) => {
         try {
           const res = await axios.post(

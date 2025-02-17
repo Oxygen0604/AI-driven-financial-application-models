@@ -1,0 +1,97 @@
+.login-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .login-background {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      object-fit: cover;
+    }
+    .login-box {
+      position: relative;
+      top: -60px;
+      width: 270px;
+      height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+      border: 1px solid white;
+      border-radius: 10px;
+      .login-logo {
+        width: 50px;
+        height: 50px;
+        object-fit: contain;
+      }
+      .login-title {
+        font-size: 30px;
+        font-weight: 900;
+        color: rgb(63, 157, 211);
+      }
+      .login-form {
+        width: 100%;
+        height: 190px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2px;
+        // border: 1px solid white;//测试定位用
+        .form-item {
+          display: flex;
+          flex-direction: column;
+          align-items: start;
+          justify-content: center;
+          label {
+            display: flex;
+            align-items: start;
+            justify-content: start;
+            width: 100px;
+            height: 20px;
+            font-size: 13px;
+            color: white;
+          }
+          input {
+            border: 1px solid white;
+            outline: none;
+            border-radius: 5px;
+            width: 180px;
+            height: 15px;
+            background: transparent;
+            padding: 5px;
+            color: white;
+          }
+        }
+        button {
+          margin-top: 15px;
+          width: 190px;
+          height: 30px;
+          border-radius: 5px;
+          background-color: #0077cc;
+          border: none;
+          color: white;
+        }
+        .register-forget {
+          margin-top: 10px;
+          width: 160px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          .link {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+  
