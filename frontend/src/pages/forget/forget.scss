@@ -1,23 +1,22 @@
-.register-container {
+.forget-container {
     width: 100vw;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  
-    .register-background {
+    .forget-background {
       width: 100%;
       height: 100%;
       position: absolute;
       z-index: -1;
       object-fit: cover;
     }
-    .register-box {
+    .forget-box {
       position: relative;
-      top: -20px;
+      top: -60px;
       width: 270px;
-      height: 540px;
+      height: 430px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -28,27 +27,25 @@
       box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
       border: 1px solid white;
       border-radius: 10px;
-  
-      .register-logo {
+      .forget-logo {
         width: 50px;
         height: 50px;
         object-fit: contain;
       }
-      .register-title {
+      .forget-title {
         font-size: 30px;
         font-weight: 900;
-        color: rgb(96, 168, 209);
+        color: rgb(63, 157, 211);
       }
-  
-      .register-form {
+      .forget-form {
         width: 100%;
-        height: 440px;
+        height: 290px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 5px;
-        //border: 1px solid white;//供测试定位使用
+        gap: 2px;
+        // border: 1px solid white;//测试定位用
         .form-item {
           display: flex;
           flex-direction: column;
@@ -56,11 +53,11 @@
           justify-content: center;
           label {
             display: flex;
-            align-items: center;
+            align-items: start;
             justify-content: start;
-            width: 180px;
-            font-size: 13px;
+            width: 190px;
             height: 20px;
+            font-size: 13px;
             color: white;
           }
           input {
@@ -70,34 +67,51 @@
             width: 180px;
             height: 15px;
             background: transparent;
-            padding: 3px;
+            padding: 5px;
             color: white;
-          }
-          select {
-            border: 1px solid white;
-            outline: none;
-            border-radius: 5px;
-            width: 190px;
-            height: 25px;
-            background: transparent;
-            padding: 3px;
-            color: white;
-            option {
-              background: #aca8a8;
-            }
           }
         }
-        button {
-          margin-top: 10px;
+        .verification-container {
+          input {
+              width: 85px;
+              margin-right: 5px;
+          }
+          .verification-btn {
+            width: 90px;
+            height: 27px;
+            border-radius: 5px;
+            background-color: #0077cc;
+            border: none;
+            color: white;
+          }
+          .verification-disabled-btn {
+            width: 90px;
+            height: 27px;
+            border-radius: 5px;
+            background-color: #355266;
+            border: none;
+            color: white;
+          }
+        }
+        .reset-btn {
+          margin-top: 15px;
           width: 190px;
           height: 30px;
           border-radius: 5px;
-          background-color: #d97f35;
+          background-color: #0077cc;
           border: none;
           color: white;
         }
-        .error-message {
-          color: red;
+        .forget-link {
+          margin-top: 10px;
+          width: 160px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          .link {
+            font-size: 14px;
+          }
         }
       }
     }

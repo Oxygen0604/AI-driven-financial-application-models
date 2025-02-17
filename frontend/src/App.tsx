@@ -12,6 +12,7 @@ const Detection=React.lazy(()=>import("./pages/detection/detection.tsx"));
 const Register=React.lazy(()=>import("./pages/register/register.tsx"));
 const Question=React.lazy(()=>import("./pages/question/question.tsx"));
 const User=React.lazy(()=>import("./pages/user/user.tsx"));
+const Forget=React.lazy(()=>import("./pages/forget/forget.tsx"));
 
 // const {isAuthenticated}=useAuthStore();
 
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
   {
     path:"/user",
     element:<User/>
+  },
+  {
+    path:"/forget",
+    element:<Forget/>
   }
 
 
