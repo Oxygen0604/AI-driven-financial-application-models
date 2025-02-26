@@ -18,15 +18,30 @@
 
     &:hover {
         width: 300px;
+        #logo{
+            background: #e4e9f5;
+            border-radius: 50px;
+        }
     }
 
     ul {
         position: relative;
         height: 100vh;
 
+        #logo{
+            transition: all 0.3s;
+        }
+
         li {
             position: relative;
             padding: 5px;
+            transition: all 0.3s;
+
+            &:hover{
+                background: #bcbfc6;
+                border-top-left-radius: 50px;
+                border-bottom-left-radius: 50px;
+            }
         }
     }
 }
