@@ -98,9 +98,7 @@ const Forget: React.FC = () => {
 
   return (
     <div className="forget-container">
-      <img className="forget-background" src={background} alt="background" />
       <div className="forget-box">
-        <img className="forget-logo" src={logo} alt="logo" />
         <div className="forget-title">重置密码</div>
         <form className="forget-form" onSubmit={handleSubmit}>
           <div className="form-item">

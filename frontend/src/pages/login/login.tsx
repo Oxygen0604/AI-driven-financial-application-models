@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../store";
 import { useUserStore } from "../../store";
 import "./login.scss";
-import background from "../../assets/background1.jpg";
-import logo from "../../assets/logo.png";
+import background from "../../assets/loginBackground.jpg";
 
 
 type LoginInputs = {
@@ -56,45 +55,48 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-container">
-      <img className="login-background" src={background} alt="background"></img>
-      <div className="login-box">
-        <img className="login-logo" src={logo} alt="logo"></img>
-        <div className="login-title">登录</div>
-        <form className="login-form" onSubmit={handleSubmit}>
-          <div className="form-item">
-            <label htmlFor="identifier">用户名或邮箱:</label>
-            <input
-              required
-              type="text"
-              name="identifier"
-              id="identifier"
-              value={inputs.identifier}
-              onChange={handleChange}
-            />
+      <div className="background" style={{ backgroundImage: `url(${background})` }}></div>
+      <div className="content">
+        <div className="unlogin-box">
+          <div className="unlogin-title">Welcome Back!</div>
+          <div className="unlogin-text">歪歪歪，你没有账户或者忘记密码啦？点击下方注册或找回！</div>
+          <div className="register" onClick={()=>{navigate("/register")}}>
+            注册账号
           </div>
-          <div className="form-item">
-            <label htmlFor="password">密码:</label>
-            <input
-              required
-              type="password"
-              name="password"
-              id="password"
-              value={inputs.password}
-              onChange={handleChange}
-            />
+          <div className="forget" onClick={()=>{navigate("/forget")}}>
+            找回密码
           </div>
-          <button type="submit">登录</button>
-          {error && <div>{error.message}</div>}
-          <div className="register-forget">
-            <Link className="link" to="/register">
-              立即注册！
-            </Link>
-            <Link className="link" to="/forget">
-              忘记密码?
-            </Link>
-          </div>
-        </form>
+        </div>
+        <div className="login-box">
+          <div className="login-title">立即登录</div>
+          <form className="login-form" onSubmit={handleSubmit}>
+            <div className="form-item">
+              <label htmlFor="identifier">用户名或邮箱:</label>
+              <input
+                required
+                type="text"
+                name="identifier"
+                id="identifier"
+                value={inputs.identifier}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-item">
+              <label htmlFor="password">密码:</label>
+              <input
+                required
+                type="password"
+                name="password"
+                id="password"
+                value={inputs.password}
+                onChange={handleChange}
+              />
+            </div>
+              <button type="submit" >登录</button>
+          </form>
+        </div>
       </div>
+      
     </div>
   );
 };
