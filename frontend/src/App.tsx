@@ -13,6 +13,7 @@ const Register=React.lazy(()=>import("./pages/register/register.tsx"));
 const Question=React.lazy(()=>import("./pages/question/question.tsx"));
 const User=React.lazy(()=>import("./pages/user/user.tsx"));
 const Forget=React.lazy(()=>import("./pages/forget/forget.tsx"));
+const Home=React.lazy(()=>import("./pages/home/home.tsx"));
 
 // const {isAuthenticated}=useAuthStore();
 
@@ -21,9 +22,9 @@ const router = createBrowserRouter([
     path:"*",
     element:
     // isAuthenticated?(
-    //   <Navigate to="/documentProcess" replace/>
+    //   <Navigate to="/home" replace/>
     // ):(
-      <Navigate to="/login" replace/>
+      <Navigate to="/home" replace/>
     // )
   },
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   {
     path:"/forget",
     element:<Forget/>
+  },
+  {
+    path:"/home",
+    element:<Home/>
   }
 
 

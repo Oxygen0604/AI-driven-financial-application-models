@@ -91,14 +91,8 @@ const Register: React.FC = () => {
 
   return (
     <div className="register-container">
-      <img
-        className="register-background"
-        src={background}
-        alt="background"
-      ></img>
       <div className="register-box">
-        <img className="register-logo" src={logo} alt="logo"></img>
-        <div className="register-title">注册</div>
+        <div className="register-title">注册账号</div>
         <form className="register-form" onSubmit={handleSubmit}>
           <div className="form-item">
             <label htmlFor="nickname">昵称（用于应用内展示）</label>
@@ -164,7 +158,7 @@ const Register: React.FC = () => {
           {error ? (
             <div className="error-message">{error.message}</div>
           ) : (
-            <div>
+            <div className="link">
               <Link to="/login">立即登录！</Link>
             </div>
           )}
