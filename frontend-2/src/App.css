@@ -1,0 +1,134 @@
+.container {
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+  background-image: url('/image.png'); 
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9); 
+}
+
+.upload-output-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 800px;
+}
+
+.upload-area {
+  width: 400px;
+  height: 200px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+
+.upload-area:hover {
+  border-color: #2196F3;
+  background-color: rgba(248, 249, 255, 0.9); 
+}
+
+.upload-label {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upload-content {
+  text-align: center;
+  color: #666;
+}
+
+.upload-content p:first-child {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.output-area {
+  width: 400px;
+  min-height: 200px;
+  padding: 1.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+
+.output-content {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: rgba(248, 248, 248, 0.9); 
+  border-radius: 5px;
+  min-height: 60px;
+}
+
+h3 {
+  color: #333;
+  margin: 0;
+}
+
+.submit-button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: white;
+  background-color: #2196F3;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #1976D2; 
+}
+
+.submit-button:active {
+  background-color: #0D47A1; 
+}
+
+/* 文本框样式 */
+.text-input-container {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 1rem;
+}
+
+.text-input {
+  width: 100%;
+  height: 100px;
+  padding: 1rem;
+  font-size: 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.8); 
+  resize: vertical; 
+}
+
+.text-input:focus {
+  outline: none;
+  border-color: #2196F3;
+}
