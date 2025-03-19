@@ -26,9 +26,7 @@ const ChatBox: React.FC<chatBoxProps> = ({ type,value}) => {
       <textarea 
         readOnly={true}
         ref={textareaRef}
-      >
-        {value}
-      </textarea>
+        value={value}/>
     </div>
   );
 };

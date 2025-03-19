@@ -1,16 +1,10 @@
 import mysql from 'mysql2/promise';
+import { readFileSync } from 'fs';
 
-// 数据库配置
-const dbConfig = {
-    host: 'localhost',     // 数据库主机
-    user: 'root',          // 数据库用户名（建议使用实际的用户名）
-    password: '123456',          // 数据库密码（如果有）
-    database: 'ai_financial_app', // 数据库名称
-    charset: 'utf8mb4', // 确保使用 utf8mb4 编码
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-};
+// 读取 JSON 配置
+const dbConfig = JSON.parse(
+  readFileSync('./config/dbConfig.json', 'utf-8')
+);
 
 // 创建连接池
 const pool = mysql.createPool(dbConfig);

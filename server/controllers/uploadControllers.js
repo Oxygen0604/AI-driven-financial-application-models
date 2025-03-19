@@ -71,7 +71,7 @@ const upload = multer({
 // 使用Python脚本处理文件
 const processPythonScript = async (filePath) => {
     return new Promise((resolve, reject) => {
-        const pythonScript = 'F:\\Files\\bisai\\huaqi\\AI chatbot\\transform.py';
+        const pythonScript = 'AI chatbot\\transform.py';
         const command = `python "${pythonScript}" "${filePath}"`;
         
         console.log(`执行Python脚本: ${command}`);

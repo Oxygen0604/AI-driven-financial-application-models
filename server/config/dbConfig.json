@@ -1,0 +1,11 @@
+
+{
+  "host": "localhost",
+  "user": "root",
+  "password": "165510",
+  "database": "ai_financial_app",
+  "port": 3306,
+  "waitForConnections": true,
+  "connectionLimit": 10,
+  "queueLimit": 0
+}

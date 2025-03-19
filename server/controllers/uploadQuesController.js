@@ -1,38 +1,42 @@
 import { db } from '../db.js';
+import path from 'path';
+import fs from 'fs-extra';
 
 // 存储用户输入的文本问题
 const uploadQuestion = async (req, res) => {
     try {
-        const { question } = req.body;
+        const date = new Date();
+        const timestamp = new Date(date.getTime()+ 8 * 60 * 60 * 1000)
+                                    .toISOString()
+                                    .replace(/[:.]/g, '-')
+                                    .replace('Z', '');
+        const filename = `request-${timestamp}.json`;
+        
+        // 定义保存路径
+        const saveDir = path.join('posts', 'saved-requests');
+        //await fs.ensureDir(saveDir); // 确保目录存在
 
-        if (!question || question.trim() === '') {
-            return res.status(400).json({
-                status: 'error',
-                message: '问题内容不能为空'
-            });
-        }
+        // 保存的内容（包含请求头、请求体、时间戳）
+        const requestData = {
+        timestamp: timestamp,
+        body: req.body,
+        };
+        console.log(requestData);
 
-        // 将问题存储到数据库
-        const [result] = await db.queryPromise(
-            `INSERT INTO questions (
-                question_text
-            ) VALUES (?)`,
-            [question.trim()]
-        );
+        // 写入文件
+        await fs.writeJSON(path.join(saveDir, filename), requestData, { spaces: 2 });
 
         res.status(200).json({
             status: 'success',
-            message: '问题上传成功',
-            data: {
-                id: result.insertId,
-                question: question.trim()
-            }
-        });
+            message: '问题已保存',
+            filename: filename
+          });
+
     } catch (error) {
         console.error('问题处理错误:', error);
         res.status(500).json({
             status: 'error',
-            message: '问题处理失败',
+            message: '问题上传失败',
             error: error.message
         });
     }

@@ -4,19 +4,19 @@ import cookieParser from 'cookie-parser';
 import authRoutes from './routes/auth.js';
 import userRoutes from './routes/users.js';
 import postRoutes from './routes/posts.js';
-import uploadRoutes from './routes/uploadRoutes.js';
-import uploadQuesRoutes from "./routes/uploadQuesRoutes.js";
+import uploadRoutes from './routes/upload.js';
 import { db, testConnection } from './db.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
+import uploadQuesRoutes from './routes/uploadQuesRoutes.js';
 
 // 获取当前目录
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 8800;
+const PORT = process.env.PORT || 5000;
 
 // 日志中间件
 app.use((req, res, next) => {
@@ -69,7 +69,8 @@ app.use('/api/auth', authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use('/api/upload', uploadRoutes);
-app.use('/api/uploadQues', uploadQuesRoutes);
+app.use('/api/uploadQues',uploadQuesRoutes);
+
 // 错误处理中间件
 app.use((err, req, res, next) => {
     console.error('未捕获的错误:', err);
@@ -117,14 +118,6 @@ const initializeTables = async () => {
         `);
         console.log('文档表初始化成功');
 
-        //如果不存在
-        await db.queryPromise(`
-        CREATE TABLE if not exists questions (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        question_text TEXT NOT NULL,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        );`);
-        console.log('问题表初始化成功');
         return true;
     } catch (error) {
         console.error('初始化表失败:', error);
