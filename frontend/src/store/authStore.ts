@@ -33,7 +33,7 @@ const useAuthStore = create<AuthState>()(
       login: async (identifier: string, password: string) => {
         try {
           const res = await axios.post(
-            "http://localhost:5000/api/users/login",
+            "http://localhost:5000/api/auth/login",
             { identifier, password }
           );
           const token = res.data.token;
@@ -52,7 +52,7 @@ const useAuthStore = create<AuthState>()(
       }) => {
         try {
           const res = await axios.post(
-            "http://localhost:5000/api/users/register",
+            "http://localhost:5000/api/auth/register",
             userData
           );
           console.log(res.data.message); // 注册成功
