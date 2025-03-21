@@ -39,6 +39,7 @@ server/
 - Python >= 3.7（用于PDF和图像处理）
 
 ## 安装和配置
+0.在主文件夹下cd server
 
 1. 安装依赖
 ```bash

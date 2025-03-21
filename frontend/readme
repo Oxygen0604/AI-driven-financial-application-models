@@ -1,0 +1,22 @@
+运行前端时出现大面积红色报错大概率是：
+1.缺少 sass 模块
+2.resolve-url-loader 依赖的 sass 未正确安装导致的连锁错误
+
+
+
+修复流程：
+# 进入前端项目目录
+cd frontend
+
+# 1. 安装核心依赖
+npm install sass sass-loader resolve-url-loader --save-dev
+
+# 2. 清理旧构建
+rm -rf node_modules/
+rm package-lock.json  # 如果是 yarn，删除 yarn.lock
+
+# 3. 重新安装所有依赖
+npm install
+
+# 4. 带缓存清理启动
+npm run start -- --reset-cache
