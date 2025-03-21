@@ -28,7 +28,7 @@ class LangChainChatBot:
                  db_url: Optional[str] = None,
                  db_token: Optional[str] = None,
                  use_async_db: bool = False,
-                 embedding_model_path: str = r"F:\Files\比赛\花旗杯\AI chatbot\model"):
+                 embedding_model_path: str = r"model"):
         
         # 保留原有的初始化代码
         self.api_key = api_key
