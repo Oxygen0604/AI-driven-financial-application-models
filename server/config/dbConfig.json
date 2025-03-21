@@ -2,8 +2,8 @@
 {
   "host": "localhost",
   "user": "root",
-  "password": "cy.0604...",
-  "database": "ai_financial_app",
+  "password": "123456",
+  "database": "testdb",
   "port": 3306,
   "waitForConnections": true,
   "connectionLimit": 10,

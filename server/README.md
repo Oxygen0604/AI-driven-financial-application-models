@@ -57,10 +57,26 @@ npm install
 }
 ```
 
-3. Python依赖安装（用于PDF和图像处理）
+3. Python环境配置（也可以不创虚拟环境直接下依赖）
+
+首先创建并激活Python虚拟环境：
+```bash
+# 创建虚拟环境
+python -m venv venv
+
+# 在Windows上激活虚拟环境
+.\venv\Scripts\activate
+
+# 在Unix/Linux上激活虚拟环境
+source venv/bin/activate
+```
+
+然后在虚拟环境中安装依赖：
 ```bash
 pip install -r requirements.txt
 ```
+
+注意：激活虚拟环境后，命令提示符前会出现(venv)前缀，表示当前在虚拟环境中。
 
 ## 启动服务器
 ```bash
