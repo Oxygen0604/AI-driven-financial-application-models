@@ -81,7 +81,7 @@ const useAuthStore = create<AuthState>()(
       requestVerification: async (email: string) => {
         try {
           const res = await axios.post(
-            "http://localhost:5000/api/users/RequestVerification",
+            "http://localhost:5000/api/auth/forgotPassword",
             { email }
           );
           if (res.status === 200) {
@@ -97,8 +97,8 @@ const useAuthStore = create<AuthState>()(
         newPassword: string
       ) => {
         try {
-          const res = await axios.put(
-            "http://localhost:5000/api/users/change-password",
+          const res = await axios.post(
+            "http://localhost:5000/api/auth/resetPassword",
             { email, verificationCode, newPassword }
           );
           if (res.status === 200) {

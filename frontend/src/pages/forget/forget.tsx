@@ -86,7 +86,7 @@ const Forget: React.FC = () => {
 
     try {
       await changePassword(inputs.email, inputs.verification, inputs.password);
-      navigate("/market");
+      navigate("/home");
     } catch (err: any) {
       if (err.response) {
         setError(err.response.data);
