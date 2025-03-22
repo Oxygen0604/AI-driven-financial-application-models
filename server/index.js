@@ -100,6 +100,21 @@ const initializeTables = async () => {
         `);
         console.log('用户表初始化成功');
 
+        await db.queryPromise(`CREATE TABLE if not exists user_questions (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            question_text TEXT NOT NULL, 
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );`); 
+            console.log('问题表初始化成功');
+
+        await db.queryPromise(`CREATE TABLE ai_responses (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            question_id INT NOT NULL, 
+            response_text TEXT NOT NULL, 
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (question_id) REFERENCES user_questions(id);`);
+            console.log('回答表初始化成功');
+
         // 创建文档表（如果不存在）
         await db.queryPromise(`
             CREATE TABLE IF NOT EXISTS documents (
