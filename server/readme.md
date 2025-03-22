@@ -96,6 +96,15 @@ npm start
 - POST `/upload/multiple` - 上传多个文件
 - GET `/upload/files` - 获取已上传文件列表
 
+### 问题上传接口
+- POST `/uploadQues/single` - 上传单个问题文件
+- POST `/uploadQues/multiple` - 上传多个问题文件
+- GET `/uploadQues/files` - 获取已上传的问题文件列表
+
+### AI回答提取接口
+- POST `/extract/response` - 从文件中提取AI回答内容
+- GET `/extract/history` - 获取历史提取记录
+
 ### 用户管理接口
 - GET `/users/profile` - 获取用户信息
 - PUT `/users/profile` - 更新用户信息
@@ -106,16 +115,6 @@ npm start
 - GET `/posts/:id` - 获取特定帖子
 - PUT `/posts/:id` - 更新帖子
 - DELETE `/posts/:id` - 删除帖子
-
-### 问题管理接口
-- POST `/upload-question` - 上传用户问题
-  - 请求体：{ "question": "问题内容" }
-  - 返回：问题ID和内容
-
-### AI回答接口
-- GET `/extract-response/:questionId` - 获取AI生成的答案
-  - 参数：questionId - 问题ID
-  - 返回：问题内容、AI回答及相关时间信息
 
 ## 文件处理功能
 系统支持多种文件格式的处理：
