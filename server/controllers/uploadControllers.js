@@ -7,6 +7,8 @@ import { db } from '../db.js';
 import chardet from 'chardet';
 import iconv from 'iconv-lite';
 import mammoth from 'mammoth';
+import { generateDocumentSummary } from './summaryController.js';
+
 //import pdf from 'pdf-parse';
 import xlsx from 'xlsx';
 import { exec } from 'child_process';
@@ -186,12 +188,12 @@ const uploadSingleFile = async (req, res) => {
         // 存储到数据库
         const [result] = await db.queryPromise(
             `INSERT INTO documents (
-                original_filename, 
-                stored_filename, 
-                original_path, 
-                txt_path, 
-                file_type, 
-                file_size, 
+                original_filename,
+                stored_filename,
+                original_path,
+                txt_path,
+                file_type,
+                file_size,
                 text_content
             ) VALUES (?, ?, ?, ?, ?, ?, ?)`,
             [
@@ -205,6 +207,10 @@ const uploadSingleFile = async (req, res) => {
             ]
         );
 
+        // 获取插入的文档ID
+        const documentId = result.insertId;
+        console.log(`文件上传成功，文档ID: ${documentId}`);
+
         // 将文本保存到独立文件（便于调试）
         const txtFilePath = filePath.replace(path.extname(filePath), '.txt');
         if (!fs.existsSync(txtFilePath)) {
@@ -212,15 +218,43 @@ const uploadSingleFile = async (req, res) => {
             fs.writeFileSync(txtFilePath, textContent, 'utf8');
         }
 
+        // 自动生成文档摘要（异步执行，不阻塞响应）
+        let summaryResult = null;
+        let summaryError = null;
+
+        // 确保环境变量设置为 true，即使没有设置也默认为 true
+        const AUTO_GENERATE_SUMMARY = process.env.AUTO_GENERATE_SUMMARY !== 'false';
+        console.log("是否自动生成摘要:", AUTO_GENERATE_SUMMARY);
+
+        if (AUTO_GENERATE_SUMMARY) {
+            try {
+                console.log(`开始为文档ID ${documentId} 生成摘要...`);
+                summaryResult = await generateDocumentSummary(documentId);
+                console.log(`文档ID ${documentId} 的摘要已自动生成，摘要ID: ${summaryResult.summaryId}`);
+            } catch (error) {
+                console.error(`自动生成文档ID ${documentId} 的摘要失败:`, error);
+                summaryError = error.message;
+            }
+        }
+
+        // 返回结果，包括摘要信息
         res.status(200).json({
             status: 'success',
             message: '文件上传成功',
             data: {
-                id: result.insertId,
+                id: documentId,
                 filename: originalname,
                 size: size,
                 type: mimetype,
-                textLength: textContent.length
+                textLength: textContent.length,
+                summary: summaryResult ? {
+                    status: 'success',
+                    id: summaryResult.summaryId,
+                    keywords: summaryResult.data.keywords,
+                    summary: summaryResult.data.summary
+                } : null,
+                summaryError: summaryError,
+                autoSummaryEnabled: AUTO_GENERATE_SUMMARY
             }
         });
     } catch (error) {
