@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './documentProcess.scss';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import Shell from '../../component/shell/shell'
+import { useFileStore } from '../../store';
 
 // 配置 Axios 全局默认值
 axios.defaults.baseURL = 'http://localhost:5000/api';
@@ -40,6 +41,8 @@ const DocumentProcess: React.FC = () => {
     const [uploadProgress, setUploadProgress] = useState<number>(0);
     const [uploadError, setUploadError] = useState<string | null>(null);
     const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
+    const [id, makeId] = useState<number>(0);
+    const setId = useFileStore((state) => state.setId);
 
     // 文档列表相关状态
     const [documents, setDocuments] = useState<Document[]>([]);
@@ -92,13 +95,18 @@ const DocumentProcess: React.FC = () => {
                         setUploadProgress(progress);
                     }
                 }
-            });
+            })
+
+            makeId(response.data.data.id);
+            setId(response.data.data.id);
 
             // 详细的响应日志
             console.log('上传响应:', {
                 status: response.status,
                 data: response.data
             });
+
+            
 
             // 重新获取文档列表
             fetchDocuments();
@@ -136,6 +144,10 @@ const DocumentProcess: React.FC = () => {
             setIsUploading(false);
         }
     };
+
+    useEffect(() => {
+        console.log(id);
+    },[])
 
     //获取文档列表
     const fetchDocuments = async () => {

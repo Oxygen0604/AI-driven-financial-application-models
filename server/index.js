@@ -10,6 +10,8 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import uploadQuesRoutes from './routes/uploadQuesRoutes.js';
+import summaryRoutes from './routes/summaryRoutes.js';
+import chatRoutes from './routes/chatRoutes.js';
 
 // 获取当前目录
 const __filename = fileURLToPath(import.meta.url);
@@ -70,6 +72,9 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use('/api/upload', uploadRoutes);
 app.use('/api/uploadQues',uploadQuesRoutes);
+app.use('/api/summary', summaryRoutes);
+app.use('/api/chat', chatRoutes);
+
 
 // 错误处理中间件
 app.use((err, req, res, next) => {
@@ -117,22 +122,7 @@ const initializeTables = async () => {
             console.log('回答表初始化成功');
 
             
-            await db.queryPromise(`
-            CREATE TABLE IF NOT EXISTS document_summaries(
-                id int NOT NULL AUTO_INCREMENT,
-                document_id int NOT NULL,
-                keywords text COLLATE utf8mb4_unicode_ci,
-                keywords_explanation text COLLATE utf8mb4_unicode_ci,
-                summary text COLLATE utf8mb4_unicode_ci,
-                outline text COLLATE utf8mb4_unicode_ci,
-                full_response text COLLATE utf8mb4_unicode_ci,
-                created_at datetime DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (id),
-                KEY document_id (document_id),
-                CONSTRAINT document_summaries_ibfk_1 FOREIGN KEY (document_id) REFERENCES documents (id) ON DELETE CASCADE
-            ) ENGINE = InnoDB AUTO_INCREMENT = 10 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci
-                `);
-                console.log('总结表初始化成功');
+           
 
         // 创建文档表（如果不存在）
         await db.queryPromise(`
@@ -152,6 +142,23 @@ const initializeTables = async () => {
         `);
         console.log('文档表初始化成功');
 
+ await db.queryPromise(`
+            CREATE TABLE IF NOT EXISTS document_summaries(
+                id int NOT NULL AUTO_INCREMENT,
+                document_id int NOT NULL,
+                keywords text COLLATE utf8mb4_unicode_ci,
+                keywords_explanation text COLLATE utf8mb4_unicode_ci,
+                summary text COLLATE utf8mb4_unicode_ci,
+                outline text COLLATE utf8mb4_unicode_ci,
+                full_response text COLLATE utf8mb4_unicode_ci,
+                created_at datetime DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (id),
+                KEY document_id (document_id),
+                CONSTRAINT document_summaries_ibfk_1 FOREIGN KEY (document_id) REFERENCES documents (id) ON DELETE CASCADE
+            ) ENGINE = InnoDB AUTO_INCREMENT = 10 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+                `);
+                console.log('总结表初始化成功');
+                
         return true;
     } catch (error) {
         console.error('初始化表失败:', error);

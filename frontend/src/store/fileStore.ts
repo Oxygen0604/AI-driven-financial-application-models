@@ -8,22 +8,27 @@ axios.defaults.baseURL = 'http://localhost:5000/api';
 interface FileStoreState {
     uploadQuestion:(question:string) => void,
     getAnswer:(question:string) => void,
-    getDetails:() => void,
+    getResponse:(id:number) => Promise<any>,
+    id:number,
+    setId:(id:number) => void
 }
 
 const useFileStore = create<FileStoreState>()(
     (set, get) => ({
+        id:2,
+        setId: (id:number) => set(() => ({ id: id })),
         uploadQuestion: (question:string) => {
-            axios.post('uploadQues/upload-question', {
+            axios.post('chat/chat', {
                 question: question,
             })
         },
         getAnswer: (question:string) => {
             
         },
-        getDetails: () => {
-            axios.get('summary/')
-        }
+        getResponse: async (id:number) => {
+            const response = await axios.get(`summary/documents/${id}/summary`)
+            return response.data
+        },
     })
 )
 

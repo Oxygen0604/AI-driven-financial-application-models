@@ -2,7 +2,7 @@
 {
   "host": "localhost",
   "user": "root",
-  "password": "123456",
+  "password": "cy.0604...",
   "database": "testdb",
   "port": 3306,
   "waitForConnections": true,
