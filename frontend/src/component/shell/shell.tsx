@@ -37,16 +37,6 @@ const Shell: React.FC = () => {
                             <div className="text">Qusetion</div>
                         </Link>
                     </li>
-                    <li className={getActiveLink("/code")}>
-                        <Link to="/code">
-                            <div className="text">QR code</div>
-                        </Link>
-                    </li>
-                    <li className={getActiveLink("/authentication")}>
-                        <Link to="/authentication">
-                            <div className="text">authentication</div>
-                        </Link>
-                    </li>
                     <li className={getActiveLink("/user")}>
                         <Link to="/user">
                             <div className="text">ME</div>
@@ -58,8 +48,6 @@ const Shell: React.FC = () => {
             <section id="analyse">Analyse</section>
             <section id="documentProcess">Document Process</section>
             <section id="question">Qusetion</section>
-            <section id="code">QR code</section>
-            <section id="authentication">authentication</section>
             <section id="user">ME</section>
         </div>
     );

@@ -6,6 +6,7 @@ import{
   Navigate
 } from "react-router-dom"
 import useAuthStore from './store/authStore';
+import ProtectedRoute from './component/ProtectedRoute/ProtectedRoute.tsx';
 const Login=React.lazy(()=>import("./pages/login/login.tsx"));
 const DocumentProcess=React.lazy(()=>import("./pages/documentProcess/documentProcess.tsx"));
 const Register=React.lazy(()=>import("./pages/register/register.tsx"));
@@ -34,11 +35,17 @@ const router = createBrowserRouter([
   },
   {
     path:"/documentProcess",
-    element:<DocumentProcess/>
+    element:
+    <ProtectedRoute>
+      <DocumentProcess/>
+    </ProtectedRoute>
   },
   {
     path:"/analyse",
-    element:<Analyse/>
+    element:
+    <ProtectedRoute>
+      <Analyse/>
+    </ProtectedRoute>
   },
   {
     path:"/register",
@@ -46,11 +53,17 @@ const router = createBrowserRouter([
   },
   {
     path:"/question",
-    element:<Question/>
+    element:
+    <ProtectedRoute>
+      <Question/>
+    </ProtectedRoute>
   },
   {
     path:"/user",
-    element:<User/>
+    element:
+    <ProtectedRoute>
+      <User/>
+    </ProtectedRoute>
   },
   {
     path:"/forget",
@@ -58,7 +71,10 @@ const router = createBrowserRouter([
   },
   {
     path:"/home",
-    element:<Home/>
+    element:
+    <ProtectedRoute>
+      <Home/>
+    </ProtectedRoute>
   }
 
 

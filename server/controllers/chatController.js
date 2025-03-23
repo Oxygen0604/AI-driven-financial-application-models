@@ -8,10 +8,11 @@ const __dirname = path.dirname(__filename);
 
 const chatWithBot = async (req, res) => {
     try {
-        const { message } = req.body;
+        // 支持message和question字段
+        const messageText = req.body.message || req.body.question;
 
         // 检查消息是否为空
-        if (!message || message.trim() === '') {
+        if (!messageText || messageText.trim() === '') {
             return res.status(400).json({
                 status: 'error',
                 message: '消息内容不能为空'
@@ -21,14 +22,28 @@ const chatWithBot = async (req, res) => {
         // 将用户消息存储到数据库
         const questionId = await db.insertPromise(
             'INSERT INTO user_questions (question_text) VALUES (?)',
-            [message.trim()]
+            [messageText.trim()]
         );
 
+        // 构建Python脚本路径
+        const scriptPath = path.join(__dirname, '..', '..', 'AI chatbot', 'LLM.py');
+        console.log('Python脚本路径:', scriptPath);
+        
         // 启动Python脚本进行对话
         const pythonProcess = spawn('python', [
-            path.join(__dirname, '..', '..', 'AI chatbot', 'LLM.py'),
-            '--message', message.trim()
+            scriptPath,
+            '--model', 'deepseek-chat',
+            '--message', messageText.trim()
         ]);
+        
+        // 检查Python进程是否成功启动
+        if (!pythonProcess.pid) {
+            console.error('Python进程启动失败');
+            return res.status(500).json({
+                status: 'error',
+                message: 'Python进程启动失败'
+            });
+        }
 
         let responseData = '';
         let errorData = '';
@@ -66,7 +81,7 @@ const chatWithBot = async (req, res) => {
                     message: '对话成功',
                     data: {
                         id: questionId,
-                        question: message.trim(),
+                        question: messageText.trim(),
                         response: responseData.trim()
                     }
                 });

@@ -43,6 +43,7 @@ const DocumentProcess: React.FC = () => {
     const [uploadSuccess, setUploadSuccess] = useState<boolean>(false);
     const [id, makeId] = useState<number>(0);
     const setId = useFileStore((state) => state.setId);
+    const [res, setRes] = useState<any>();
 
     // 文档列表相关状态
     const [documents, setDocuments] = useState<Document[]>([]);
@@ -97,13 +98,10 @@ const DocumentProcess: React.FC = () => {
                 }
             })
 
-            makeId(response.data.data.id);
-            setId(response.data.data.id);
-
             // 详细的响应日志
             console.log('上传响应:', {
                 status: response.status,
-                data: response.data
+                data: response.data,
             });
 
             
@@ -147,6 +145,7 @@ const DocumentProcess: React.FC = () => {
 
     useEffect(() => {
         console.log(id);
+        console.log(res);
     },[])
 
     //获取文档列表

@@ -250,9 +250,8 @@ async function processSummaryResponse(summaryText, documentId, document) {
 const getDocumentSummary = async (documentId) => {
     try {
         const [summaries] = await db.queryPromise(
-            `SELECT * FROM document_summaries WHERE document_id = ?
+            `SELECT * FROM document_summaries
              ORDER BY created_at DESC LIMIT 1`,
-            [documentId]
         );
 
         if (summaries.length === 0) {
