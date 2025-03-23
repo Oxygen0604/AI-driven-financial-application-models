@@ -107,13 +107,32 @@ const initializeTables = async () => {
         );`); 
             console.log('问题表初始化成功');
 
-        await db.queryPromise(`CREATE TABLE ai_responses (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            question_id INT NOT NULL, 
-            response_text TEXT NOT NULL, 
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (question_id) REFERENCES user_questions(id);`);
+        await db.queryPromise(`CREATE TABLE IF NOT EXISTS ai_responses (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    question_id INT NOT NULL,
+    response_text TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (question_id) REFERENCES user_questions(id) -- 去掉分号，闭合外键定义
+); -- 正确闭合整个 CREATE TABLE 语句`)
             console.log('回答表初始化成功');
+
+            
+            await db.queryPromise(`
+            CREATE TABLE IF NOT EXISTS document_summaries(
+                id int NOT NULL AUTO_INCREMENT,
+                document_id int NOT NULL,
+                keywords text COLLATE utf8mb4_unicode_ci,
+                keywords_explanation text COLLATE utf8mb4_unicode_ci,
+                summary text COLLATE utf8mb4_unicode_ci,
+                outline text COLLATE utf8mb4_unicode_ci,
+                full_response text COLLATE utf8mb4_unicode_ci,
+                created_at datetime DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (id),
+                KEY document_id (document_id),
+                CONSTRAINT document_summaries_ibfk_1 FOREIGN KEY (document_id) REFERENCES documents (id) ON DELETE CASCADE
+            ) ENGINE = InnoDB AUTO_INCREMENT = 10 DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci
+                `);
+                console.log('总结表初始化成功');
 
         // 创建文档表（如果不存在）
         await db.queryPromise(`

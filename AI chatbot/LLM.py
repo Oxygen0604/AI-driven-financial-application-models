@@ -792,7 +792,7 @@ def main():
     parser.add_argument("--db_url", help="数据库后端URL", default=None)
     parser.add_argument("--db_token", help="数据库后端认证令牌", default=None)
     parser.add_argument("--async_db", help="使用异步数据库发送", action="store_true")
-    parser.add_argument("--embedding_path", help="嵌入模型保存位置", default=r"F:\Files\比赛\花旗杯\AI chatbot\model")
+    parser.add_argument("--embedding_path", help="嵌入模型保存位置", default=r"model")
     parser.add_argument("--custom_embedding", help="自定义嵌入模型名称", default=None)
     args = parser.parse_args()
     args.api_key = api_key

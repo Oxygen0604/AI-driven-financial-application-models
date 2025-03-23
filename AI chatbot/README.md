@@ -39,7 +39,7 @@ pip install langchain requests torch transformers faiss-cpu openai langchain_com
 ```
 LangChainChatBot/
 │
-├── main.py              # 主程序文件，启动聊天机器人
+├── LLM.py              # 主程序文件，启动聊天机器人
 ├── README.md            # 项目说明文档
 ├── model/                # 存放嵌入模型的路径
 ├── RAG/                  # 存储向量存储和QA链的文件夹
@@ -55,7 +55,7 @@ LangChainChatBot/
 - **数据库配置**：如果您希望将对话保存到数据库中，可以提供数据库的 URL 和 Token。
 - **嵌入模型路径**：设置嵌入模型保存位置，默认路径为 `./model`。
 
-在 `main.py` 文件中，您可以通过命令行参数或修改代码来自定义这些配置。
+在 `LLM.py` 文件中，您可以通过命令行参数或修改代码来自定义这些配置。
 
 ## 使用方法
 
@@ -64,7 +64,7 @@ LangChainChatBot/
 通过命令行启动聊天机器人：
 
 ```bash
-python main.py
+python LLM.py
 ```
 
 此时，您可以与机器人进行对话。
