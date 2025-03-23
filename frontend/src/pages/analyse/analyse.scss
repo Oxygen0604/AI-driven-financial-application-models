@@ -1,0 +1,22 @@
+body{
+    background: #e4e9f5;
+}
+
+.analyse{
+    display: flex;
+        background: #0d3ca9;
+
+    ::-webkit-scrollbar{
+        display: none;
+    }
+
+    .content{
+        display: flex;
+        position: relative;
+        left: 94px;
+        width: calc(100% - 94px);
+        height: 100%;
+        overflow-y: scroll;
+        background: #0d3ca9;
+    }
+}

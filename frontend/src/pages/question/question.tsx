@@ -3,6 +3,7 @@ import { useState, useEffect,useRef } from "react";
 import "./question.scss";
 import Shell from '../../component/shell/shell';
 import ChatBox from '../../component/chatBox/chatBox';
+import { useFileStore } from '../../store';
 
 interface chatBoxProps {
   type: boolean; // 类型
@@ -13,6 +14,7 @@ const Question = () => {
   const [items, setItems] = useState<chatBoxProps[]>([]);
   const [inputValue, setInputValue] = useState<string>("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const uploadQuestion = useFileStore(state => state.uploadQuestion);
 
   const handleOnClick = () => {
     if (inputValue.trim() === "") {
@@ -21,9 +23,10 @@ const Question = () => {
     }
     setItems([...items, {type: false, value: inputValue}]);
     textareaRef.current!.value = "";
+    uploadQuestion(inputValue);
   };
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleOnChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputValue(event.target.value);
   }
 

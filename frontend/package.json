@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^5.24.4",
     "asserts": "^4.0.2",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
